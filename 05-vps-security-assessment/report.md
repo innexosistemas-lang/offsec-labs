@@ -2,7 +2,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Target** | Hostinger VPS (Kali Linux 2026.1) |
+| **Target** | Cloud VPS (Kali Linux 2026.1) |
 | **Engagement Type** | Infrastructure Security Assessment |
 | **Tester** | Daniel Reis |
 | **Date** | 2026-10-07 |
@@ -13,7 +13,7 @@
 
 ## 1. Executive Summary
 
-A security assessment was conducted on a freshly provisioned Hostinger VPS running Kali Linux 2026.1. The initial configuration presented several significant security weaknesses common in default cloud deployments, including root SSH access, password-based authentication, absence of firewall rules, and no brute-force protection.
+A security assessment was conducted on a freshly provisioned cloud VPS running Kali Linux 2026.1. The initial configuration presented several significant security weaknesses common in default cloud deployments, including root SSH access, password-based authentication, absence of firewall rules, and no brute-force protection.
 
 Seven findings were identified ranging from High to Low severity. All findings were remediated during the engagement, reducing the attack surface from an exposed default configuration to a hardened, production-grade baseline.
 
@@ -35,7 +35,7 @@ Seven findings were identified ranging from High to Low severity. All findings w
 
 | Target | Type | Address |
 |--------|------|---------|
-| Hostinger VPS | Linux Server | 179.236.252.233 |
+| Cloud VPS | Linux Server | [REDACTED] |
 
 ### 2.2 Rules of Engagement
 
@@ -165,7 +165,7 @@ Status for the jail: sshd
 
 **Description:**
 
-Although key-based authentication was configured, the initial Hostinger setup also retained password authentication as a fallback. The default `kali` user had a known default password.
+Although key-based authentication was configured, the initial cloud provider setup also retained password authentication as a fallback. The default `kali` user had a known default password.
 
 **Impact:**
 

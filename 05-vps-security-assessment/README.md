@@ -8,7 +8,7 @@ Perform a security assessment and hardening of a freshly provisioned VPS, identi
 
 | Item | Detail |
 |------|--------|
-| Target | Hostinger VPS (4 vCPU, 16 GB RAM, 200 GB) |
+| Target | Cloud VPS (4 vCPU, 16 GB RAM, 200 GB) |
 | OS | Kali Linux 2026.1 (Debian-based) |
 | Initial State | Default installation, no hardening |
 
