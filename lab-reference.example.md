@@ -1,13 +1,5 @@
 # Pentest Lab —  Modelo de Referência
 
-> **O que é este arquivo:** um modelo de exemplo, sem dados da .
->  Para usar: copie este modelo
-> e preencha os valores reais localmente.
->
-> ```bash
-> cp lab-reference.example.md lab-reference.md   # e edite os <PLACEHOLDERS>
-> ```
-
 > **Pré-requisito dos túneis:** se o sshd da VPS tiver `AllowTcpForwarding no`
 > (comum em hardening), libere-o só para o usuário do lab com um bloco
 > `Match User <USUARIO> → AllowTcpForwarding yes`. Sem isso, `LocalForward`/
