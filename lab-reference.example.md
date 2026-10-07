@@ -1,20 +1,12 @@
 # Pentest Lab —  Modelo de Referência
 
-> **O que é este arquivo:** um modelo de exemplo, sem dados.
+> **O que é este arquivo:** um modelo de exemplo, sem dados da .
 >  Para usar: copie este modelo
 > e preencha os valores reais localmente.
 >
 > ```bash
 > cp lab-reference.example.md lab-reference.md   # e edite os <PLACEHOLDERS>
 > ```
-
-## Acesso
-
-```bash
-ssh lab                        # shell na VPS
-autossh -M 0 -f -N lab-tunnels # abre todos os túneis (reconecta sozinho)
-pkill -f "ssh.*lab-tunnels"    # fecha os túneis
-```
 
 > **Pré-requisito dos túneis:** se o sshd da VPS tiver `AllowTcpForwarding no`
 > (comum em hardening), libere-o só para o usuário do lab com um bloco
@@ -46,7 +38,7 @@ Host lab-tunnels
 - **IP:** `<VPS_IP>`
 - **Porta SSH:** `<SSH_PORT>`
 - **Usuário:** `<USUARIO>` (sudo)
-- **Auth:** chave SSH (`~/.ssh/<SUA_CHAVE>`)
+- **Auth:** chave SSH 
 - **OS:** Kali Linux
 - **Recursos:** 4 vCPU, 16 GB RAM, 200 GB disco
 
@@ -54,10 +46,10 @@ Host lab-tunnels
 
 | Alvo | Acesso local | Credenciais |
 |------|-------------|-------------|
-| DVWA | http://localhost:8080 | `<USUARIO>` / `<SENHA>` |
-| Juice Shop | http://localhost:3000 | — |
-| Corp API | http://localhost:5000 (ou interno `10.10.0.40:5000`) | SQLi bypass ou `<USUARIO>` / `<SENHA>` |
-| Target Bravo (Apache) | http://localhost:8888 | webshell: /cmd.php?cmd=id |
+| DVWA | http://localhost:8080 | 
+| Juice Shop | http://localhost:3000 |
+| Corp API | http://localhost:5000 | SQLi bypass
+| Target Bravo (Apache) | http://localhost:8888 | webshell
 
 ## Alvos Linux (via proxychains)
 
@@ -66,25 +58,20 @@ Host lab-tunnels
 | Target Alpha | 10.10.0.10 | porta 22 | `<USUARIO>` / `<SENHA>` |
 | Target Bravo | 10.10.0.20 | porta 22 | `<USUARIO>` / `<SENHA>` |
 
-```bash
-proxychains4 ssh <USUARIO>@10.10.0.10
-proxychains4 ssh <USUARIO>@10.10.0.20
-```
-
 ## Servidor Corporativo (10.10.0.30)
 
 | Serviço | Porta | Detalhe |
 |---------|-------|---------|
 | FTP | 21 | anonymous login |
 | SSH | 22 | `<USUARIO>` / `<SENHA>` |
-| DNS | 53 | zone transfer: `dig @10.10.0.30 <DOMINIO> AXFR` |
+| DNS | 53 | zone transfer: `dig @10.10.0.X <DOMINIO> AXFR` |
 | SMB | 445 | shares com guest / credenciais |
 | SNMP | 161/udp | community: `<COMMUNITY>` |
 
 ## API Vulnerável (Corp API — `10.10.0.40:5000` / `localhost:5000`)
 
-> Dual-homed: na rede interna `pentestlab` (`10.10.0.40`, via proxychains) **e**
-> na bridge `pentestlab-web`, que publica a porta em `127.0.0.1:5000` na VPS
+> Dual-homed: na rede interna `pentestlab` (via proxychains) **e**
+> na bridge `pentestlab-web`, que publica a porta da VPS
 > para o túnel.
 
 | Endpoint | Vulnerabilidade |
@@ -98,17 +85,12 @@ proxychains4 ssh <USUARIO>@10.10.0.20
 
 ## Ambiente Windows Simulado (rede 10.10.1.x)
 
-### AD Domain Controller (10.10.1.10)
-
 | Serviço | Porta | Detalhe |
 |---------|-------|---------|
 | LDAP | 389 | Enum users, groups, SPNs |
 | Kerberos | 88 | Kerberoasting, AS-REP roast |
 | SMB | 445 | Domain shares, SYSVOL |
 | DNS | 53 | Domain DNS |
-
-**Domain:** `<DOMINIO>`
-**Admin:** `<USUARIO>` / `<SENHA>`
 
 Contas de serviço / usuários: ver arquivo real (preencher localmente).
 Vulnerabilidades típicas: Kerberoasting, AS-REP Roasting, senhas fracas.
@@ -119,9 +101,8 @@ Vulnerabilidades típicas: Kerberoasting, AS-REP Roasting, senhas fracas.
 |---------|-------|-------------|
 | MSSQL | 1433 | `<USUARIO>` / `<SENHA>` |
 
-**Database:** `<DB>` — xp_cmdshell habilitado, PII em plaintext (lab).
 
-### File Server (10.10.1.30)
+### File Server 
 
 | Share | Acesso | Conteúdo (lab) |
 |-------|--------|----------------|
@@ -129,13 +110,6 @@ Vulnerabilidades típicas: Kerberoasting, AS-REP Roasting, senhas fracas.
 | IT | credenciais | scripts de deploy, inventário |
 | HR | credenciais | PII (employees.csv) |
 | Backup | credenciais | hashes NTLM (sam.bak) |
-
-```bash
-# Acesso via proxychains
-proxychains4 smbclient //10.10.1.30/Public -N
-proxychains4 ldapsearch -H ldap://10.10.1.10 -x -b "DC=<DOMINIO>,DC=local"
-proxychains4 impacket-GetUserSPNs <DOMINIO>/<USUARIO>:<SENHA> -dc-ip 10.10.1.10
-```
 
 ## Redes Docker
 
@@ -150,11 +124,4 @@ proxychains4 impacket-GetUserSPNs <DOMINIO>/<USUARIO>:<SENHA> -dc-ip 10.10.1.10
 > pelo túnel, ele precisa estar também na bridge `pentestlab-web`
 > (foi o caso do corp-api).
 
-## Gerenciar containers
 
-```bash
-ssh lab
-sudo docker ps                                                   # ver status
-sudo docker compose -f /opt/lab/<lab>/docker-compose.yml restart # reiniciar um lab
-sudo docker stats --no-stream                                    # uso de recursos
-```
