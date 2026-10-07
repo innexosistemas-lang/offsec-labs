@@ -1,8 +1,7 @@
-# Pentest Lab — Referência Rápida (MODELO)
+# Pentest Lab —  Modelo de Referência
 
-> **O que é este arquivo:** um modelo de exemplo, sem dados sensíveis.
-> O arquivo real (`lab-reference.md`) fica **fora do git** (`.gitignore`) porque
-> contém IP da VPS e credenciais em texto puro. Para usar: copie este modelo
+> **O que é este arquivo:** um modelo de exemplo, sem dados.
+>  Para usar: copie este modelo
 > e preencha os valores reais localmente.
 >
 > ```bash
