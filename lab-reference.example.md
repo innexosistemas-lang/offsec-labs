@@ -111,7 +111,7 @@ Vulnerabilidades típicas: Kerberoasting, AS-REP Roasting, senhas fracas.
 | pentestlab-web | 10.20.0.0/24 (bridge) | DVWA, Juice Shop, corp-api (dual-homed) |
 | pentestlab-win | 10.10.1.0/24 (interna) | Ambiente Windows simulado |
 
-> Redes `internal` do Docker **não publicam portas no host** — alvos nelas só
+> Redes `internal` do Docker **não publicam portas no host** os alvos nelas só
 > são alcançáveis via SOCKS/proxychains. Para expor um alvo em `localhost:*`
 > pelo túnel, ele precisa estar também na bridge `pentestlab-web`
 > (foi o caso do corp-api).
