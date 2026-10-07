@@ -1,0 +1,17 @@
+*.pcap
+*.cap
+*.raw
+*.burp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+__pycache__/
+*.pyc
+.env
+credentials.txt
+id_rsa*
+*.key
+*.pem
+notes-private/
