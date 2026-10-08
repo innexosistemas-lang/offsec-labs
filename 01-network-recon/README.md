@@ -22,4 +22,4 @@ Realizar o reconhecimento ofensivo de rede contra um ambiente corporativo simula
 
 - Objetivo (Entender: Rede, Serviços, tipos de Vulnerabilidades e exploração)
 
-> Todos os conteúdos e informações compartilhados não são fictícios, e nada é exposto.
+> Todos os conteúdos e informações compartilhados são fictícios, e nada é exposto.
