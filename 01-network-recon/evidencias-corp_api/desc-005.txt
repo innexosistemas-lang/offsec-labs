@@ -1,0 +1,26 @@
+===== DESCOBERTA-005 Mass Assignment =====
+$ PUT /api/v1/users/2 {role:admin}
+
+--- antes ---
+{
+  "email": "jsilva@techcorp.local",
+  "id": 2,
+  "role": "admin",
+  "salary": 8500.0,
+  "username": "jsilva"
+}
+
+--- PUT role=admin ---
+{
+  "message": "Updated"
+}
+
+--- depois ---
+{
+  "email": "jsilva@techcorp.local",
+  "id": 2,
+  "role": "admin",
+  "salary": 8500.0,
+  "username": "jsilva"
+}
+
