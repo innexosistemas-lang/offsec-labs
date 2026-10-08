@@ -1,28 +1,28 @@
-# Project 03 — Linux Privilege Escalation
+# Projeto 03 — Escalação de Privilégios no Linux
 
-## Objective
+## Objetivo
 
-Gain initial access as a low-privilege user on custom Linux targets and escalate to root through multiple attack vectors.
+Obter acesso inicial como usuário de baixo privilégio em alvos Linux customizados e escalar até root por meio de múltiplos vetores de ataque.
 
-## Target Environment
+## Ambiente-Alvo
 
-- Target Alpha (`10.10.0.10`) — 7 privesc vectors
-- Target Bravo (`10.10.0.20`) — 8 privesc vectors including lateral movement
+- Alvo Alpha (`10.10.0.10`) — 7 vetores de privesc
+- Alvo Bravo (`10.10.0.20`) — 8 vetores de privesc incluindo movimentação lateral
 
-## Skills Demonstrated
+## Habilidades Demonstradas
 
-- SUID binary exploitation (find, nmap)
-- Sudo misconfiguration abuse (vim, tar)
-- Cron job exploitation (writable scripts, wildcard injection)
-- Linux capabilities abuse (cap_setuid on Python)
-- Sensitive file discovery (writable /etc/shadow, exposed SSH keys)
-- Credential harvesting (bash_history, config files)
-- Lateral movement between users
-- PATH hijacking
+- Exploração de binários SUID (find, nmap)
+- Abuso de sudo mal configurado (vim, tar)
+- Exploração de tarefas cron (scripts graváveis, injeção por wildcard)
+- Abuso de capabilities do Linux (cap_setuid no Python)
+- Descoberta de arquivos sensíveis (/etc/shadow gravável, chaves SSH expostas)
+- Coleta de credenciais (bash_history, arquivos de configuração)
+- Movimentação lateral entre usuários
+- Sequestro de PATH (PATH hijacking)
 
-## Deliverables
+## Entregáveis
 
-- [ ] Target Alpha — all 7 privesc paths documented
-- [ ] Target Bravo — full attack chain from webdev to root
-- [ ] LinPEAS analysis and manual enumeration comparison
-- [ ] Full report following pentest template
+- [ ] Alvo Alpha — todos os 7 caminhos de privesc documentados
+- [ ] Alvo Bravo — cadeia de ataque completa de webdev a root
+- [ ] Análise com LinPEAS e comparação com enumeração manual
+- [ ] Relatório completo seguindo o template de pentest

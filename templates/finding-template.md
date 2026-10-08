@@ -1,35 +1,35 @@
-### [FINDING-XXX] — [Title]
+### [DESCOBERTA-XXX] — [Título]
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | [Critical / High / Medium / Low / Info] |
-| **CVSS Score** | [0.0 - 10.0] |
-| **CWE** | [CWE-XXX — Name] |
-| **Affected Asset** | [target] |
-| **Status** | [Open / Remediated] |
+| **Severidade** | [Crítica / Alta / Média / Baixa / Informativa] |
+| **Nota CVSS** | [0.0 - 10.0] |
+| **CWE** | [CWE-XXX — Nome] |
+| **Ativo Afetado** | [alvo] |
+| **Status** | [Aberto / Remediado] |
 
-**Description:**
+**Descrição:**
 
-[What the vulnerability is.]
+[O que é a vulnerabilidade.]
 
-**Impact:**
+**Impacto:**
 
-[What an attacker could achieve.]
+[O que um atacante poderia alcançar.]
 
-**Evidence:**
+**Evidência:**
 
 ```
-[command output / request-response / screenshot reference]
+[saída de comando / requisição-resposta / referência de captura de tela]
 ```
 
-**Steps to Reproduce:**
+**Passos para Reproduzir:**
 
-1. [Step]
+1. [Passo]
 
-**Remediation:**
+**Remediação:**
 
-[Actionable fix.]
+[Correção acionável.]
 
-**References:**
+**Referências:**
 
 - [URL]

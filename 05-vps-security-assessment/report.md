@@ -1,96 +1,96 @@
-# Security Assessment Report — VPS Hardening
+# Relatório de Avaliação de Segurança — Hardening de VPS
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Target** | Cloud VPS (Kali Linux 2026.1) |
-| **Engagement Type** | Infrastructure Security Assessment |
-| **Tester** | Daniel Reis |
-| **Date** | 2026-10-07 |
-| **Version** | 1.0 |
-| **Classification** | Portfolio / Educational |
+| **Alvo** | VPS em nuvem (Kali Linux 2026.1) |
+| **Tipo de Engajamento** | Avaliação de Segurança de Infraestrutura |
+| **Testador** | Daniel Reis |
+| **Data** | 2026-10-07 |
+| **Versão** | 1.0 |
+| **Classificação** | Portfólio / Educacional |
 
 ---
 
-## 1. Executive Summary
+## 1. Sumário Executivo
 
-A security assessment was conducted on a freshly provisioned cloud VPS running Kali Linux 2026.1. The initial configuration presented several significant security weaknesses common in default cloud deployments, including root SSH access, password-based authentication, absence of firewall rules, and no brute-force protection.
+Foi conduzida uma avaliação de segurança em uma VPS em nuvem recém-provisionada executando Kali Linux 2026.1. A configuração inicial apresentava diversas fraquezas de segurança significativas, comuns em implantações padrão em nuvem, incluindo acesso SSH como root, autenticação baseada em senha, ausência de regras de firewall e nenhuma proteção contra força bruta.
 
-Seven findings were identified ranging from High to Low severity. All findings were remediated during the engagement, reducing the attack surface from an exposed default configuration to a hardened, production-grade baseline.
+Foram identificadas sete descobertas, variando de severidade Alta a Baixa. Todas as descobertas foram remediadas durante o engajamento, reduzindo a superfície de ataque de uma configuração padrão exposta para uma baseline endurecida e de nível de produção.
 
-**Overall Risk Rating (Before):** High
-**Overall Risk Rating (After):** Low
+**Classificação de Risco Geral (Antes):** Alta
+**Classificação de Risco Geral (Depois):** Baixa
 
-| Severity | Found | Remediated |
-|----------|-------|------------|
-| High | 3 | 3 |
-| Medium | 2 | 2 |
-| Low | 1 | 1 |
-| Informational | 1 | 1 |
-
----
-
-## 2. Scope
-
-### 2.1 In Scope
-
-| Target | Type | Address |
-|--------|------|---------|
-| Cloud VPS | Linux Server | [REDACTED] |
-
-### 2.2 Rules of Engagement
-
-- Full administrative access (authorized owner)
-- Assessment and remediation in the same engagement
-- No third-party systems involved
+| Severidade | Encontradas | Remediadas |
+|------------|-------------|------------|
+| Alta | 3 | 3 |
+| Média | 2 | 2 |
+| Baixa | 1 | 1 |
+| Informativa | 1 | 1 |
 
 ---
 
-## 3. Methodology
+## 2. Escopo
 
-Assessment followed a structured approach based on CIS Benchmarks and NIST SP 800-123 (Guide to General Server Security):
+### 2.1 Dentro do Escopo
 
-1. **Initial Audit** — document default configuration state
-2. **Vulnerability Identification** — assess each service and configuration
-3. **Remediation** — apply hardening measures
-4. **Verification** — confirm each fix is effective
-5. **Documentation** — produce findings and evidence
+| Alvo | Tipo | Endereço |
+|------|------|----------|
+| VPS em nuvem | Servidor Linux | [REMOVIDO] |
+
+### 2.2 Regras de Engajamento
+
+- Acesso administrativo total (proprietário autorizado)
+- Avaliação e remediação no mesmo engajamento
+- Nenhum sistema de terceiros envolvido
 
 ---
 
-## 4. Findings
+## 3. Metodologia
 
-### 4.1 [FINDING-001] — SSH Root Login Enabled
+A avaliação seguiu uma abordagem estruturada baseada nos CIS Benchmarks e no NIST SP 800-123 (Guide to General Server Security):
 
-| Field | Value |
+1. **Auditoria Inicial** — documentar o estado da configuração padrão
+2. **Identificação de Vulnerabilidades** — avaliar cada serviço e configuração
+3. **Remediação** — aplicar medidas de hardening
+4. **Verificação** — confirmar que cada correção é efetiva
+5. **Documentação** — produzir descobertas e evidências
+
+---
+
+## 4. Descobertas
+
+### 4.1 [DESCOBERTA-001] — Login SSH como Root Habilitado
+
+| Campo | Valor |
 |-------|-------|
-| **Severity** | High |
-| **CVSS Score** | 7.5 |
+| **Severidade** | Alta |
+| **Nota CVSS** | 7.5 |
 | **CWE** | CWE-250 — Execution with Unnecessary Privileges |
-| **Affected Asset** | SSH Service (port 22) |
-| **Status** | Remediated |
+| **Ativo Afetado** | Serviço SSH (porta 22) |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-The SSH service was configured with `PermitRootLogin yes`, allowing direct authentication to the root account over the network.
+O serviço SSH estava configurado com `PermitRootLogin yes`, permitindo autenticação direta na conta root pela rede.
 
-**Impact:**
+**Impacto:**
 
-An attacker who obtains root credentials (via brute force, credential stuffing, or key compromise) gains immediate full system control without any privilege escalation step.
+Um atacante que obtenha as credenciais de root (via força bruta, credential stuffing ou comprometimento de chave) ganha controle total e imediato do sistema, sem qualquer etapa de escalação de privilégios.
 
-**Evidence:**
+**Evidência:**
 
-Before:
+Antes:
 ```
 $ grep PermitRootLogin /etc/ssh/sshd_config
 PermitRootLogin yes
 ```
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-1. Created a dedicated administrative user (`pentester`) with sudo privileges
-2. Copied SSH authorized keys to the new user
-3. Set `PermitRootLogin no` in SSH configuration
-4. Added `AllowUsers pentester` to restrict SSH access
+1. Criado um usuário administrativo dedicado (`pentester`) com privilégios de sudo
+2. Copiadas as chaves SSH autorizadas para o novo usuário
+3. Definido `PermitRootLogin no` na configuração do SSH
+4. Adicionado `AllowUsers pentester` para restringir o acesso SSH
 
 ```
 $ grep -E "PermitRootLogin|AllowUsers" /etc/ssh/sshd_config.d/hardening.conf
@@ -100,27 +100,27 @@ AllowUsers pentester
 
 ---
 
-### 4.2 [FINDING-002] — SSH on Default Port with No Rate Limiting
+### 4.2 [DESCOBERTA-002] — SSH na Porta Padrão sem Limitação de Taxa
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | High |
-| **CVSS Score** | 7.1 |
+| **Severidade** | Alta |
+| **Nota CVSS** | 7.1 |
 | **CWE** | CWE-307 — Improper Restriction of Excessive Authentication Attempts |
-| **Affected Asset** | SSH Service (port 22) |
-| **Status** | Remediated |
+| **Ativo Afetado** | Serviço SSH (porta 22) |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-SSH was listening on the default port 22 with no brute-force protection mechanism. Automated scanners constantly probe port 22 on all public IP addresses.
+O SSH estava escutando na porta padrão 22 sem nenhum mecanismo de proteção contra força bruta. Scanners automatizados sondam constantemente a porta 22 em todos os endereços IP públicos.
 
-**Impact:**
+**Impacto:**
 
-The server was exposed to automated brute-force and credential stuffing attacks. Combined with password authentication (Finding 003), this significantly increased the probability of unauthorized access.
+O servidor estava exposto a ataques automatizados de força bruta e credential stuffing. Combinado com a autenticação por senha (Descoberta 003), isso aumentava significativamente a probabilidade de acesso não autorizado.
 
-**Evidence:**
+**Evidência:**
 
-Before:
+Antes:
 ```
 $ ss -tlnp | grep ssh
 LISTEN 0 128 0.0.0.0:22 0.0.0.0:* users:(("sshd",...))
@@ -129,11 +129,11 @@ $ systemctl status fail2ban
 Unit fail2ban.service could not be found.
 ```
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-1. Changed SSH port from 22 to 2222
-2. Installed and configured fail2ban (3 failed attempts = 2-hour ban)
-3. Set `MaxAuthTries 3` and `LoginGraceTime 30` in SSH configuration
+1. Alterada a porta SSH de 22 para 2222
+2. Instalado e configurado o fail2ban (3 tentativas falhas = banimento de 2 horas)
+3. Definidos `MaxAuthTries 3` e `LoginGraceTime 30` na configuração do SSH
 
 ```
 $ grep "^Port" /etc/ssh/sshd_config.d/hardening.conf
@@ -153,29 +153,29 @@ Status for the jail: sshd
 
 ---
 
-### 4.3 [FINDING-003] — Password Authentication Enabled
+### 4.3 [DESCOBERTA-003] — Autenticação por Senha Habilitada
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | High |
-| **CVSS Score** | 7.5 |
+| **Severidade** | Alta |
+| **Nota CVSS** | 7.5 |
 | **CWE** | CWE-521 — Weak Password Requirements |
-| **Affected Asset** | SSH Service |
-| **Status** | Remediated |
+| **Ativo Afetado** | Serviço SSH |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-Although key-based authentication was configured, the initial cloud provider setup also retained password authentication as a fallback. The default `kali` user had a known default password.
+Embora a autenticação baseada em chave estivesse configurada, a configuração inicial do provedor de nuvem também mantinha a autenticação por senha como alternativa (fallback). O usuário padrão `kali` possuía uma senha padrão conhecida.
 
-**Impact:**
+**Impacto:**
 
-Password authentication makes the server vulnerable to brute-force attacks. Default credentials for the `kali` user are publicly documented.
+A autenticação por senha torna o servidor vulnerável a ataques de força bruta. As credenciais padrão do usuário `kali` são publicamente documentadas.
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-1. Confirmed `PasswordAuthentication no` in SSH configuration
-2. Set `AuthenticationMethods publickey` to enforce key-only access
-3. Removed the default `kali` user account entirely
+1. Confirmado `PasswordAuthentication no` na configuração do SSH
+2. Definido `AuthenticationMethods publickey` para impor acesso somente por chave
+3. Removida completamente a conta de usuário padrão `kali`
 
 ```
 $ grep -E "PasswordAuthentication|AuthenticationMethods" /etc/ssh/sshd_config.d/hardening.conf
@@ -188,27 +188,27 @@ id: 'kali': no such user
 
 ---
 
-### 4.4 [FINDING-004] — No Firewall Configured
+### 4.4 [DESCOBERTA-004] — Nenhum Firewall Configurado
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | Medium |
-| **CVSS Score** | 5.3 |
+| **Severidade** | Média |
+| **Nota CVSS** | 5.3 |
 | **CWE** | CWE-284 — Improper Access Control |
-| **Affected Asset** | Network Perimeter |
-| **Status** | Remediated |
+| **Ativo Afetado** | Perímetro de Rede |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-No host-based firewall was configured. All services bound to 0.0.0.0 were accessible from the public internet.
+Nenhum firewall baseado em host estava configurado. Todos os serviços vinculados a 0.0.0.0 ficavam acessíveis a partir da internet pública.
 
-**Impact:**
+**Impacto:**
 
-Any service started on the VPS (intentionally or not) would be immediately exposed to the internet, increasing the attack surface.
+Qualquer serviço iniciado na VPS (intencionalmente ou não) ficaria imediatamente exposto à internet, aumentando a superfície de ataque.
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-Installed and configured UFW with a default-deny incoming policy:
+Instalado e configurado o UFW com uma política padrão de negação para entrada (default-deny):
 
 ```
 $ ufw status verbose
@@ -223,27 +223,27 @@ To                         Action      From
 
 ---
 
-### 4.5 [FINDING-005] — No Automatic Security Updates
+### 4.5 [DESCOBERTA-005] — Sem Atualizações de Segurança Automáticas
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | Medium |
-| **CVSS Score** | 5.0 |
+| **Severidade** | Média |
+| **Nota CVSS** | 5.0 |
 | **CWE** | CWE-1104 — Use of Unmaintained Third Party Components |
-| **Affected Asset** | Operating System |
-| **Status** | Remediated |
+| **Ativo Afetado** | Sistema Operacional |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-The system had no mechanism for automatic security patch installation. Critical vulnerabilities in installed packages would remain unpatched until manually updated.
+O sistema não possuía mecanismo para instalação automática de patches de segurança. Vulnerabilidades críticas em pacotes instalados permaneceriam sem correção até serem atualizadas manualmente.
 
-**Impact:**
+**Impacto:**
 
-Known CVEs in system packages could be exploited if patches are not applied promptly.
+CVEs conhecidas em pacotes do sistema poderiam ser exploradas caso os patches não fossem aplicados prontamente.
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-Installed `unattended-upgrades` with daily security update checks:
+Instalado o `unattended-upgrades` com verificações diárias de atualizações de segurança:
 
 ```
 $ cat /etc/apt/apt.conf.d/20auto-upgrades
@@ -254,23 +254,23 @@ APT::Periodic::AutocleanInterval "7";
 
 ---
 
-### 4.6 [FINDING-006] — Unnecessary Default User Account
+### 4.6 [DESCOBERTA-006] — Conta de Usuário Padrão Desnecessária
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | Low |
-| **CVSS Score** | 3.1 |
+| **Severidade** | Baixa |
+| **Nota CVSS** | 3.1 |
 | **CWE** | CWE-798 — Use of Hard-coded Credentials |
-| **Affected Asset** | User Accounts |
-| **Status** | Remediated |
+| **Ativo Afetado** | Contas de Usuário |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-The default `kali` user (UID 1000) was present with sudo group membership. Default Kali installations use well-known credentials for this account.
+O usuário padrão `kali` (UID 1000) estava presente com participação no grupo sudo. Instalações padrão do Kali usam credenciais conhecidas para essa conta.
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-Removed the user and its home directory:
+Removido o usuário e seu diretório home:
 
 ```
 $ userdel -r kali
@@ -278,23 +278,23 @@ $ userdel -r kali
 
 ---
 
-### 4.7 [FINDING-007] — SSH Information Disclosure
+### 4.7 [DESCOBERTA-007] — Divulgação de Informações pelo SSH
 
-| Field | Value |
+| Campo | Valor |
 |-------|-------|
-| **Severity** | Informational |
-| **CVSS Score** | 0.0 |
+| **Severidade** | Informativa |
+| **Nota CVSS** | 0.0 |
 | **CWE** | CWE-200 — Exposure of Sensitive Information |
-| **Affected Asset** | SSH Service |
-| **Status** | Remediated |
+| **Ativo Afetado** | Serviço SSH |
+| **Status** | Remediado |
 
-**Description:**
+**Descrição:**
 
-SSH exposed unnecessary features that could aid reconnaissance: X11 forwarding was enabled, and TCP forwarding was unrestricted.
+O SSH expunha recursos desnecessários que poderiam auxiliar o reconhecimento: o encaminhamento X11 estava habilitado e o encaminhamento TCP era irrestrito.
 
-**Remediation Applied:**
+**Remediação Aplicada:**
 
-Disabled unnecessary SSH features:
+Desabilitados recursos desnecessários do SSH:
 
 ```
 X11Forwarding no
@@ -305,50 +305,50 @@ ClientAliveCountMax 2
 
 ---
 
-## 5. Remediation Summary
+## 5. Resumo de Remediação
 
-| ID | Finding | Severity | Remediation | Status |
-|----|---------|----------|-------------|--------|
-| 001 | SSH Root Login | High | Disabled, created admin user | Done |
-| 002 | Default Port / No Rate Limit | High | Port 2222, fail2ban | Done |
-| 003 | Password Authentication | High | Key-only, removed default user | Done |
-| 004 | No Firewall | Medium | UFW default-deny | Done |
-| 005 | No Auto Updates | Medium | unattended-upgrades | Done |
-| 006 | Default User Account | Low | Removed `kali` user | Done |
-| 007 | SSH Info Disclosure | Info | Disabled X11/TCP forwarding | Done |
-
----
-
-## 6. Conclusion
-
-The VPS was successfully hardened from a default, high-risk state to a secured baseline configuration. All seven identified findings were remediated. The server now implements defense-in-depth with:
-
-- **Authentication:** key-only, non-root, single authorized user
-- **Network:** firewall with default-deny, non-standard SSH port
-- **Monitoring:** fail2ban for brute-force detection and automated response
-- **Maintenance:** automatic security updates enabled
-
-### Recommendations for Ongoing Security
-
-1. Review fail2ban logs periodically for attack patterns
-2. Monitor `unattended-upgrades` logs for failed updates
-3. Perform periodic configuration audits against CIS benchmarks
-4. Consider implementing log forwarding to a central SIEM
+| ID | Descoberta | Severidade | Remediação | Status |
+|----|------------|------------|------------|--------|
+| 001 | Login SSH como Root | Alta | Desabilitado, criado usuário admin | Concluído |
+| 002 | Porta Padrão / Sem Limite de Taxa | Alta | Porta 2222, fail2ban | Concluído |
+| 003 | Autenticação por Senha | Alta | Somente chave, removido usuário padrão | Concluído |
+| 004 | Sem Firewall | Média | UFW default-deny | Concluído |
+| 005 | Sem Atualizações Automáticas | Média | unattended-upgrades | Concluído |
+| 006 | Conta de Usuário Padrão | Baixa | Removido usuário `kali` | Concluído |
+| 007 | Divulgação de Informações SSH | Info | Desabilitado encaminhamento X11/TCP | Concluído |
 
 ---
 
-## Appendix A — Tools Used
+## 6. Conclusão
 
-| Tool | Purpose |
-|------|---------|
-| Nmap / ss | Port and service discovery |
-| UFW | Host-based firewall management |
-| fail2ban | Brute-force prevention |
-| ssh-keygen | Key pair generation |
-| systemctl | Service management and auditing |
+A VPS foi endurecida com sucesso, de um estado padrão de alto risco para uma configuração baseline segura. Todas as sete descobertas identificadas foram remediadas. O servidor agora implementa defesa em profundidade com:
 
-## Appendix B — Configuration Files
+- **Autenticação:** somente por chave, sem root, um único usuário autorizado
+- **Rede:** firewall com default-deny, porta SSH não padrão
+- **Monitoramento:** fail2ban para detecção de força bruta e resposta automatizada
+- **Manutenção:** atualizações de segurança automáticas habilitadas
 
-- `/etc/ssh/sshd_config.d/hardening.conf` — SSH hardening
-- `/etc/fail2ban/jail.local` — Fail2ban SSH jail
-- `/etc/apt/apt.conf.d/20auto-upgrades` — Automatic updates
+### Recomendações para Segurança Contínua
+
+1. Revisar periodicamente os logs do fail2ban em busca de padrões de ataque
+2. Monitorar os logs do `unattended-upgrades` em busca de atualizações com falha
+3. Realizar auditorias periódicas de configuração contra os CIS benchmarks
+4. Considerar a implementação de encaminhamento de logs para um SIEM central
+
+---
+
+## Apêndice A — Ferramentas Utilizadas
+
+| Ferramenta | Finalidade |
+|------------|------------|
+| Nmap / ss | Descoberta de portas e serviços |
+| UFW | Gerenciamento de firewall baseado em host |
+| fail2ban | Prevenção de força bruta |
+| ssh-keygen | Geração de par de chaves |
+| systemctl | Gerenciamento e auditoria de serviços |
+
+## Apêndice B — Arquivos de Configuração
+
+- `/etc/ssh/sshd_config.d/hardening.conf` — Hardening do SSH
+- `/etc/fail2ban/jail.local` — Jail SSH do fail2ban
+- `/etc/apt/apt.conf.d/20auto-upgrades` — Atualizações automáticas

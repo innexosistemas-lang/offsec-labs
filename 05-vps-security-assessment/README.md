@@ -1,26 +1,26 @@
-# Project 05 — VPS Security Assessment
+# Projeto 05 — Avaliação de Segurança de VPS
 
-## Objective
+## Objetivo
 
-Perform a security assessment and hardening of a freshly provisioned VPS, identifying default misconfigurations and applying industry-standard remediation measures.
+Realizar uma avaliação de segurança e o hardening de uma VPS recém-provisionada, identificando configurações padrão inseguras e aplicando medidas de remediação padrão da indústria.
 
-## Environment
+## Ambiente
 
-| Item | Detail |
-|------|--------|
-| Target | Cloud VPS (4 vCPU, 16 GB RAM, 200 GB) |
-| OS | Kali Linux 2026.1 (Debian-based) |
-| Initial State | Default installation, no hardening |
+| Item | Detalhe |
+|------|---------|
+| Alvo | VPS em nuvem (4 vCPU, 16 GB RAM, 200 GB) |
+| SO | Kali Linux 2026.1 (baseado em Debian) |
+| Estado Inicial | Instalação padrão, sem hardening |
 
-## Skills Demonstrated
+## Habilidades Demonstradas
 
-- Linux system administration and hardening
-- SSH security configuration
-- Firewall management (UFW)
-- Intrusion prevention (fail2ban)
-- Service auditing and attack surface reduction
-- Security documentation and reporting
+- Administração e hardening de sistemas Linux
+- Configuração de segurança do SSH
+- Gerenciamento de firewall (UFW)
+- Prevenção de intrusão (fail2ban)
+- Auditoria de serviços e redução da superfície de ataque
+- Documentação e elaboração de relatórios de segurança
 
-## Deliverables
+## Entregáveis
 
-- [Full Security Assessment Report](report.md)
+- [Relatório Completo da Avaliação de Segurança](report.md)

@@ -1,29 +1,29 @@
-# Project 01 — Network Reconnaissance
+# Projeto 01 — Reconhecimento de Rede
 
-## Objective
+## Objetivo
 
-Perform network reconnaissance against a simulated corporate environment to map the attack surface, identify live hosts, open ports, running services, and potential entry points.
+Realizar o reconhecimento de rede contra um ambiente corporativo simulado para mapear a superfície de ataque, identificar hosts ativos, portas abertas, serviços em execução e possíveis pontos de entrada.
 
-## Target Environment
+## Ambiente-Alvo
 
-- Simulated corporate network (TechCorp): `10.10.0.0/24`
-- DNS server with zone transfer vulnerability
-- Multiple services: FTP, SMB, SSH, HTTP, SNMP, REST API
+- Rede corporativa simulada (TechCorp): `10.10.0.0/24`
+- Servidor DNS com vulnerabilidade de transferência de zona
+- Múltiplos serviços: FTP, SMB, SSH, HTTP, SNMP, API REST
 
-## Skills Demonstrated
+## Habilidades Demonstradas
 
-- Host discovery and network mapping
-- Port scanning and service enumeration (Nmap)
-- DNS enumeration and zone transfer exploitation
-- SNMP enumeration with default community strings
-- SMB share enumeration
-- FTP anonymous access enumeration
-- Attack surface documentation
+- Descoberta de hosts e mapeamento de rede
+- Varredura de portas e enumeração de serviços (Nmap)
+- Enumeração de DNS e exploração de transferência de zona
+- Enumeração de SNMP com community strings padrão
+- Enumeração de compartilhamentos SMB
+- Enumeração de acesso anônimo a FTP
+- Documentação da superfície de ataque
 
-## Deliverables
+## Entregáveis
 
-- [ ] Reconnaissance methodology documentation
-- [ ] Nmap scan results and analysis
-- [ ] DNS zone transfer evidence
-- [ ] Network topology diagram
-- [ ] Full report following pentest template
+- [ ] Documentação da metodologia de reconhecimento
+- [ ] Resultados e análise das varreduras com Nmap
+- [ ] Evidência da transferência de zona DNS
+- [ ] Diagrama da topologia de rede
+- [ ] Relatório completo seguindo o template de pentest
