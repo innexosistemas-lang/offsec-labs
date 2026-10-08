@@ -83,7 +83,7 @@ Para cada serviço web/API, mapear a superfície antes da exploração.
 ## 3. Convenções de Evidência
 
 - Toda saída de comando relevante é salva como arquivo de texto em
-  `evidencias-<alvo>/` (ex.: `evidencias-corp_api/desc-001.txt`).
+  `evidencias-<alvo>/` (ex.: `corp-api/evidencias/desc-001.txt`).
 - Cada evidência referencia a descoberta correspondente pelo ID
   (`DESCOBERTA-XXX`).
 - Dados sensíveis reais (IP público da VPS, credenciais pessoais) **nunca**
@@ -106,8 +106,8 @@ Para cada serviço web/API, mapear a superfície antes da exploração.
 **Executado até o momento:** reconhecimento completo da **Corp API**
 (`10.10.0.40:5000`) — banner grabbing, enumeração de endpoints e força bruta
 de diretórios com `gobuster` —, documentado em
-[corp-api-recon.md](corp-api-recon.md) e formalizado em
-[relatorio-pentest-corp-api.md](relatorio-pentest-corp-api.md).
+[corp-api-recon.md](corp-api/corp-api-recon.md) e formalizado em
+[relatorio-pentest-corp-api.md](corp-api/relatorio-pentest-corp-api.md).
 
 **Próximos passos:** varredura Nmap de todo o `/24` (itens 2 e 3 da checklist),
 transferência de zona DNS no servidor corporativo (`10.10.0.30`) e diagrama de

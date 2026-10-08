@@ -7,7 +7,7 @@
 | **Testador** | Daniel Reis |
 | **Data** | 2026-10-08 |
 
-> Evidência bruta em [evidencias-dns/axfr-techcorp.txt](evidencias-dns/axfr-techcorp.txt).
+> Evidência bruta em [evidencias/dns/axfr-techcorp.txt](evidencias/dns/axfr-techcorp.txt).
 
 ---
 

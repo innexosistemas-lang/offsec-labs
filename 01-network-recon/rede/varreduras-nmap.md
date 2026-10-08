@@ -8,8 +8,8 @@
 | **Ferramenta** | Nmap 7.99 |
 | **Ponto de origem** | VPS/host do laboratório (`10.10.0.1`), com acesso direto à bridge Docker do `/24` |
 
-> Metodologia em [metodologia-recon.md](metodologia-recon.md). Saídas brutas em
-> [evidencias-nmap/](evidencias-nmap/).
+> Metodologia em [metodologia-recon.md](../metodologia-recon.md). Saídas brutas em
+> [evidencias/nmap/](evidencias/nmap/).
 
 ---
 
@@ -17,10 +17,10 @@
 
 | # | Objetivo | Comando | Evidência |
 |---|----------|---------|-----------|
-| 1 | Descoberta de hosts | `nmap -sn 10.10.0.0/24` | [01-host-discovery.txt](evidencias-nmap/01-host-discovery.txt) |
-| 2 | Versão de serviços (top 1000 TCP) | `nmap -sV 10.10.0.0/24` | [02-sv-scan.txt](evidencias-nmap/02-sv-scan.txt) |
-| 3 | Todas as portas TCP + scripts | `sudo nmap -sS -sV -sC -p- -T4 10.10.0.10 10.10.0.20 10.10.0.30 10.10.0.40` | [03-full-ports-scripts.txt](evidencias-nmap/03-full-ports-scripts.txt) |
-| 4 | Portas UDP (top 50) | `sudo nmap -sU --top-ports 50 -T4 10.10.0.10 10.10.0.20 10.10.0.30 10.10.0.40` | [04-udp-scan.txt](evidencias-nmap/04-udp-scan.txt) |
+| 1 | Descoberta de hosts | `nmap -sn 10.10.0.0/24` | [01-host-discovery.txt](evidencias/nmap/01-host-discovery.txt) |
+| 2 | Versão de serviços (top 1000 TCP) | `nmap -sV 10.10.0.0/24` | [02-sv-scan.txt](evidencias/nmap/02-sv-scan.txt) |
+| 3 | Todas as portas TCP + scripts | `sudo nmap -sS -sV -sC -p- -T4 10.10.0.10 10.10.0.20 10.10.0.30 10.10.0.40` | [03-full-ports-scripts.txt](evidencias/nmap/03-full-ports-scripts.txt) |
+| 4 | Portas UDP (top 50) | `sudo nmap -sU --top-ports 50 -T4 10.10.0.10 10.10.0.20 10.10.0.30 10.10.0.40` | [04-udp-scan.txt](evidencias/nmap/04-udp-scan.txt) |
 
 ---
 
@@ -95,7 +95,7 @@ Host mais exposto da rede. Achados relevantes dos scripts:
 ```
 
 Única porta: a API Flask/Werkzeug. Já avaliada em detalhe — ver
-[relatorio-pentest-corp-api.md](relatorio-pentest-corp-api.md).
+[relatorio-pentest-corp-api.md](../corp-api/relatorio-pentest-corp-api.md).
 
 ### 3.5 `10.10.0.1` — Gateway / Host do Lab
 
@@ -105,7 +105,7 @@ Host mais exposto da rede. Achados relevantes dos scripts:
 
 É a própria VPS (host Docker). SSH na porta **2222** e demais portas
 filtradas/sem resposta — coerente com o hardening documentado no
-[Projeto 05](../05-vps-security-assessment/report.md). Fora do escopo de ataque
+[Projeto 05](../../05-vps-security-assessment/report.md). Fora do escopo de ataque
 do engajamento interno.
 
 ---
