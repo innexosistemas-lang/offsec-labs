@@ -20,14 +20,6 @@ Realizar o reconhecimento de rede contra um ambiente corporativo simulado para m
 - Enumeração de acesso anônimo a FTP
 - Documentação da superfície de ataque
 
-## Entregáveis
-
-- [x] [Documentação da metodologia de reconhecimento](metodologia-recon.md)
-- [x] [Resultados e análise das varreduras com Nmap](rede/varreduras-nmap.md)
-- [x] [Evidência da transferência de zona DNS](rede/transferencia-zona-dns.md)
-- [x] [Diagrama da topologia de rede](rede/topologia-rede.md)
-- [x] [Relatório completo seguindo o template de pentest](corp-api/relatorio-pentest-corp-api.md) — Corp API (`10.10.0.40`)
-
 > Todos os entregáveis do Projeto 01 concluídos. Os 6 hosts revelados pela
 > transferência de zona (`.50`–`.91`) ficam como alvos para os próximos projetos
 > quando estiverem online.
