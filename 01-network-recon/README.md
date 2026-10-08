@@ -2,24 +2,24 @@
 
 ## Objetivo
 
-Realizar o reconhecimento de rede contra um ambiente corporativo simulado para mapear a superfície de ataque, identificar hosts ativos, portas abertas, serviços em execução e possíveis pontos de entrada.
+Realizar o reconhecimento ofensivo de rede contra um ambiente corporativo simulado para mapear a superfície de ataque, identificar hosts ativos, portas abertas, serviços em execução e possíveis pontos de entrada. 
 
 ## Ambiente-Alvo
 
-- Rede corporativa simulada (TechCorp): `10.10.0.0/24`
-- Servidor DNS com vulnerabilidade de transferência de zona
-- Múltiplos serviços: FTP, SMB, SSH, HTTP, SNMP, API REST
+- Rede corporativa simulada (TechCorp)
+- Servidor DNS com vulnerabilidade 
+- Tipos variados serviços: FTP, SMB, SSH, HTTP, SNMP, API REST
 
-## Habilidades Demonstradas
+## Habilidades a serem demonstradas
 
-- Descoberta de hosts e mapeamento de rede
-- Varredura de portas e enumeração de serviços (Nmap)
+- Descoberta de hosts atraves de mapeamento de rede
+- Varredura de portas e enumeração de serviços
 - Enumeração de DNS e exploração de transferência de zona
 - Enumeração de SNMP com community strings padrão
 - Enumeração de compartilhamentos SMB
 - Enumeração de acesso anônimo a FTP
 - Documentação da superfície de ataque
 
-> Todos os entregáveis do Projeto 01 concluídos. Os 6 hosts revelados pela
-> transferência de zona (`.50`–`.91`) ficam como alvos para os próximos projetos
-> quando estiverem online.
+- Objetivo (Entender: Rede, Serviços, tipos de Vulnerabilidades e exploração)
+
+> Todos os conteúdos e informações compartilhados não são fictícios, e nada é exposto.
