@@ -1,0 +1,79 @@
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-08 18:28 +0000
+Nmap scan report for 10.10.0.10
+Host is up (0.0000090s latency).
+Not shown: 65534 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+| ssh-hostkey: 
+|   256 81:63:49:82:6d:65:88:d5:41:e3:7d:e3:a0:e2:ae:23 (ECDSA)
+|_  256 27:fa:56:96:31:a9:a3:47:e1:d2:f8:72:4d:7d:f0:bc (ED25519)
+MAC Address: 9A:C2:F9:0B:5A:3A (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 10.10.0.20
+Host is up (0.0000090s latency).
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+| ssh-hostkey: 
+|   256 4d:a8:ed:fe:e7:d2:2c:0c:61:bc:10:20:48:30:d3:54 (ECDSA)
+|_  256 df:54:5b:39:ac:4b:4d:16:fb:ba:a7:c2:a1:34:4f:98 (ED25519)
+80/tcp open  http    Apache httpd 2.4.68 ((Debian))
+|_http-server-header: Apache/2.4.68 (Debian)
+|_http-title: Apache2 Debian Default Page: It works
+MAC Address: A6:EF:5E:C3:17:C5 (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 10.10.0.30
+Host is up (0.0000090s latency).
+Not shown: 65530 closed tcp ports (reset)
+PORT    STATE SERVICE     VERSION
+21/tcp  open  ftp         vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| drwxr-xr-x    2 101      104          4096 Oct 07 03:18 internal
+|_drwxr-xr-x    2 101      104          4096 Oct 07 03:18 pub
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 10.10.0.1
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 2
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+22/tcp  open  ssh         OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+| ssh-hostkey: 
+|   256 ef:41:c1:b9:ed:cf:bd:e4:0b:5b:90:cb:1b:c8:07:c4 (ECDSA)
+|_  256 a8:b1:4e:c2:be:8e:d1:11:b5:b7:fb:6e:11:8e:a7:1c (ED25519)
+53/tcp  open  domain      ISC BIND 9.18.49-1~deb12u2 (Debian Linux)
+| dns-nsid: 
+|_  bind.version: 9.18.49-1~deb12u2-Debian
+139/tcp open  netbios-ssn Samba smbd 4
+445/tcp open  netbios-ssn Samba smbd 4
+MAC Address: E2:91:A5:2E:E9:4A (Unknown)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_nbstat: NetBIOS name: SRV-FILES01, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-time: 
+|   date: 2026-10-08T18:28:26
+|_  start_date: N/A
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+
+Nmap scan report for 10.10.0.40
+Host is up (0.0000090s latency).
+Not shown: 65534 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+5000/tcp open  http    Werkzeug httpd 3.1.9 (Python 3.11.17)
+|_http-title: 404 Not Found
+|_http-server-header: Werkzeug/3.1.9 Python/3.11.17
+MAC Address: 02:30:FA:3A:E0:3D (Unknown)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 4 IP addresses (4 hosts up) scanned in 24.79 seconds

@@ -10,7 +10,7 @@ Todos os projetos foram executados em um ambiente de laboratório controlado (VP
 
 | # | Projeto | Área de Foco | Status |
 |---|---------|--------------|--------|
-| 01 | [Reconhecimento de Rede](01-network-recon/) | Descoberta de hosts, varredura de portas, enumeração de serviços | Em andamento |
+| 01 | [Reconhecimento de Rede](01-network-recon/) | Descoberta de hosts, varredura de portas, enumeração de serviços | Concluído |
 | 02 | [Pentest de Aplicação Web](02-web-pentest/) | OWASP Top 10, SQLi, XSS, bypass de autenticação | Em andamento |
 | 03 | [Escalação de Privilégios no Linux](03-linux-privilege-escalation/) | SUID, sudo mal configurado, abuso de cron, capabilities | Em andamento |
 | 04 | [Análise do OWASP Top 10](04-owasp-top-10/) | Injeção, Autenticação Quebrada, SSRF, Configuração Insegura | Em andamento |

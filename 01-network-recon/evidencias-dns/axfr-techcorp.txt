@@ -1,0 +1,25 @@
+$ dig axfr techcorp.local @10.10.0.30
+
+; <<>> DiG 9.20.27-2-Debian <<>> axfr techcorp.local @10.10.0.30
+; (1 server found)
+;; global options: +cmd
+techcorp.local.         86400   IN      SOA     ns1.techcorp.local. admin.techcorp.local. 2024010101 3600 1800 604800 86400
+techcorp.local.         86400   IN      NS      ns1.techcorp.local.
+admin.techcorp.local.   86400   IN      CNAME   srv-files01.techcorp.local.
+backup.techcorp.local.  86400   IN      A       10.10.0.30
+dev.techcorp.local.     86400   IN      A       10.10.0.90
+gitlab.techcorp.local.  86400   IN      A       10.10.0.80
+intranet.techcorp.local. 86400  IN      A       10.10.0.30
+jenkins.techcorp.local. 86400   IN      A       10.10.0.70
+mail.techcorp.local.    86400   IN      A       10.10.0.60
+ns1.techcorp.local.     86400   IN      A       10.10.0.30
+srv-db01.techcorp.local. 86400  IN      A       10.10.0.40
+srv-files01.techcorp.local. 86400 IN    A       10.10.0.30
+srv-web01.techcorp.local. 86400 IN      A       10.10.0.20
+staging.techcorp.local. 86400   IN      A       10.10.0.91
+vpn.techcorp.local.     86400   IN      A       10.10.0.50
+techcorp.local.         86400   IN      SOA     ns1.techcorp.local. admin.techcorp.local. 2024010101 3600 1800 604800 86400
+;; Query time: 4 msec
+;; SERVER: 10.10.0.30#53(10.10.0.30) (TCP)
+;; WHEN: Thu Oct 08 18:35:14 UTC 2026
+;; XFR size: 16 records (messages 1, bytes 456)

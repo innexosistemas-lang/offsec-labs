@@ -1,0 +1,47 @@
+$ nmap -sV 10.10.0.0/24
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-08 18:19 +0000
+Nmap scan report for 10.10.0.10
+Host is up (0.0000090s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+MAC Address: 9A:C2:F9:0B:5A:3A (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 10.10.0.20
+Host is up (0.0000090s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.68 ((Debian))
+MAC Address: A6:EF:5E:C3:17:C5 (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 10.10.0.30
+Host is up (0.0000090s latency).
+Not shown: 995 closed tcp ports (reset)
+PORT    STATE SERVICE     VERSION
+21/tcp  open  ftp         vsftpd 3.0.3
+22/tcp  open  ssh         OpenSSH 9.2p1 Debian 2+deb12u10 (protocol 2.0)
+53/tcp  open  domain      ISC BIND 9.18.49-1~deb12u2 (Debian Linux)
+139/tcp open  netbios-ssn Samba smbd 4
+445/tcp open  netbios-ssn Samba smbd 4
+MAC Address: E2:91:A5:2E:E9:4A (Unknown)
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 10.10.0.40
+Host is up (0.0000090s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+5000/tcp open  http    Werkzeug httpd 3.1.9 (Python 3.11.17)
+MAC Address: 02:30:FA:3A:E0:3D (Unknown)
+
+Nmap scan report for srv2040813.local (10.10.0.1)
+Host is up (0.000040s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT     STATE SERVICE VERSION
+2222/tcp open  ssh     OpenSSH 10.2p1 Debian 5 (protocol 2.0)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (5 hosts up) scanned in 134.59 seconds
