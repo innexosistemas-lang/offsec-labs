@@ -1,0 +1,74 @@
+{
+  "uid": "lab-soc-wazuh",
+  "title": "SOC — Wazuh (Eventos de Segurança)",
+  "tags": ["lab", "soc", "wazuh"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-24h", "to": "now" },
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Total de alertas (período)",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [ { "color": "blue", "value": null } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "area", "justifyMode": "auto", "textMode": "value" },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "*", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "date_histogram", "id": "2", "field": "timestamp", "settings": { "interval": "auto", "min_doc_count": "0" } } ], "timeField": "timestamp", "format": "time_series" } ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Alertas nível ≥ 7 (alta severidade)",
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 0 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [ { "color": "orange", "value": null }, { "color": "red", "value": 1 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "rule.level:>=7", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "date_histogram", "id": "2", "field": "timestamp", "settings": { "interval": "auto", "min_doc_count": "0" } } ], "timeField": "timestamp", "format": "time_series" } ]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Alertas ao longo do tempo",
+      "gridPos": { "h": 5, "w": 12, "x": 12, "y": 0 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": { "custom": { "drawStyle": "bars", "fillOpacity": 40, "lineWidth": 1 }, "color": { "mode": "palette-classic" } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "*", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "date_histogram", "id": "2", "field": "timestamp", "settings": { "interval": "auto", "min_doc_count": "0" } } ], "timeField": "timestamp", "format": "time_series" } ]
+    },
+    {
+      "id": 4,
+      "type": "table",
+      "title": "Top regras acionadas (rule.id)",
+      "gridPos": { "h": 9, "w": 8, "x": 0, "y": 5 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "options": { "showHeader": true },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "*", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "terms", "id": "2", "field": "rule.id", "settings": { "order": "desc", "orderBy": "_count", "size": "15" } } ], "timeField": "timestamp", "format": "table" } ]
+    },
+    {
+      "id": 5,
+      "type": "table",
+      "title": "Top IPs de origem (data.srcip)",
+      "gridPos": { "h": 9, "w": 8, "x": 8, "y": 5 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "options": { "showHeader": true },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "*", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "terms", "id": "2", "field": "data.srcip", "settings": { "order": "desc", "orderBy": "_count", "size": "15" } } ], "timeField": "timestamp", "format": "table" } ]
+    },
+    {
+      "id": 6,
+      "type": "table",
+      "title": "Top grupos/técnicas (rule.groups)",
+      "gridPos": { "h": 9, "w": 8, "x": 16, "y": 5 },
+      "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "options": { "showHeader": true },
+      "targets": [ { "refId": "A", "datasource": { "type": "grafana-opensearch-datasource", "uid": "cg144vg17yyv4e" }, "query": "*", "metrics": [ { "id": "1", "type": "count" } ], "bucketAggs": [ { "type": "terms", "id": "2", "field": "rule.groups", "settings": { "order": "desc", "orderBy": "_count", "size": "15" } } ], "timeField": "timestamp", "format": "table" } ]
+    }
+  ]
+}

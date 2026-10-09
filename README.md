@@ -1,111 +1,130 @@
-<h1 align="center">🛡️ Portfólio de Segurança Ofensiva</h1>
-<p align="center"><strong>Daniel Reis</strong> · Pentest · Red Team · Segurança de Aplicações Web</p>
+# Offsec-Labs 
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Foco-Penetration%20Testing-red?style=for-the-badge" alt="Pentest">
-  <img src="https://img.shields.io/badge/-Red%20Team-black?style=for-the-badge" alt="Red Team">
-  <img src="https://img.shields.io/badge/-Web%20AppSec-blueviolet?style=for-the-badge" alt="Web AppSec">
-  <img src="https://img.shields.io/badge/-Vuln%20Assessment-teal?style=for-the-badge" alt="Vuln Assessment">
-</p>
+> Laboratório prático pessoal para desenvolver e **evidenciar** habilidades de **NOC** (monitoramento e disponibilidade de infraestrutura) e **SOC** (detecção e resposta a incidentes) 
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Kali%20Linux-557C94?style=flat&logo=kalilinux&logoColor=white" alt="Kali">
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux">
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white" alt="Bash">
-  <img src="https://img.shields.io/badge/OWASP-000000?style=flat&logo=owasp&logoColor=white" alt="OWASP">
-  <img src="https://img.shields.io/badge/Burp%20Suite-FF6633?style=flat&logo=burpsuite&logoColor=white" alt="Burp">
-  <img src="https://img.shields.io/badge/Wireshark-1679A7?style=flat&logo=wireshark&logoColor=white" alt="Wireshark">
-</p>
+![status](https://img.shields.io/badge/status-ativo-brightgreen) ![labs](https://img.shields.io/badge/labs-9-blue) ![foco](https://img.shields.io/badge/foco-NOC%20%7C%20SOC-purple)
 
----
 
-Projetos práticos de segurança ofensiva cobrindo o ciclo de um engajamento — do
-**reconhecimento** à **exploração**, **pós-exploração** e **relatório
-profissional**. Cada projeto é documentado com metodologia, evidências e
-remediação, no formato de um entregável real de pentest.
+## Objetivo
 
-> Todos os testes foram executados em **ambiente de laboratório controlado e de
-> propriedade própria** (VPS com alvos em Docker), seguindo metodologias padrão
-> da indústria (**OWASP**, **PTES**, **NIST**). Alvos, hostnames e dados são
-> fictícios.
+Este portfólio documenta um ambiente de estudo que cobre as duas pontas de um centro de operações:
 
----
+- **NOC (Network Operations Center):** manter serviços **no ar e saudáveis**  monitoramento de disponibilidade, métricas, alertas de indisponibilidade, hardening e atualização.
 
-## 📂 Projetos
+- **SOC (Security Operations Center):** **detectar e responder** a atividade maliciosa, coleta de logs, SIEM, regras de detecção, correlação, resposta automática e caça a ameaças (threat hunting).
 
-| # | Projeto | Área de Foco | Status |
-|---|---------|--------------|:------:|
-| 01 | [**Reconhecimento de Rede**](01-network-recon/) | Descoberta de hosts, varredura de portas, enumeração de serviços | ![](https://img.shields.io/badge/-conclu%C3%ADdo-success) |
-| 02 | [Pentest de Aplicação Web](02-web-pentest/) | OWASP Top 10, SQLi, XSS, bypass de autenticação | ![](https://img.shields.io/badge/-em%20andamento-yellow) |
-| 03 | [Escalação de Privilégios no Linux](03-linux-privilege-escalation/) | SUID, sudo mal configurado, abuso de cron, capabilities | ![](https://img.shields.io/badge/-em%20andamento-yellow) |
-| 04 | [Análise do OWASP Top 10](04-owasp-top-10/) | Injeção, Autenticação Quebrada, SSRF, Configuração Insegura | ![](https://img.shields.io/badge/-em%20andamento-yellow) |
-| 05 | [**Avaliação de Segurança de VPS**](05-vps-security-assessment/) | Hardening, firewall, SSH, auditoria de serviços | ![](https://img.shields.io/badge/-conclu%C3%ADdo-success) |
-| 06 | [Relatório Completo de Pentest](06-final-pentest-report/) | Engajamento ponta a ponta contra ambiente corporativo | ![](https://img.shields.io/badge/-em%20andamento-yellow) |
+Cada componente do laboratório é um exercício isolado que que tem o proposito de demonstrar hardskills que serão publicados aqui no GitHub.
 
----
 
-## ⭐ Destaque
+## Infraestrutura do Lab
 
-**[Relatório de Pentest — Corp API](01-network-recon/corp-api/relatorio-pentest-corp-api.md)**
+| Item | Detalhe |
+| - | - |
+| Host | VPS, Ubuntu 26.04 LTS, 4 vCPU / 16 GB RAM |
+| Acesso | SSH por chave na porta 2222 (root desabilitado) |
+| Exposição | IP público 24/7 (ataques reais chegam de verdade) |
+| Contêineres | Docker (alvos vulneráveis isolados) |
 
-Teste de intrusão completo contra uma API REST (Flask/Werkzeug), documentado no
-padrão profissional: sumário executivo, escopo, metodologia, **8 descobertas
-(5 críticas)** com CVSS/CWE, evidências, impacto e remediação.
 
-Destaques técnicos: SQL Injection com bypass de autenticação, IDOR, mass
-assignment para escalação de privilégios, forja de tokens JWT via secret key
-exposta e senhas armazenadas em texto puro.
+**Políticas **
 
----
 
-## 🧪 Ambiente de Laboratório
+- Nada de senhas, chaves ou tokens no repositório (`.gitignore` cobre `*.key`, `*.pem`, `id_rsa*`, `.env`, `credentials.txt`).
 
-| | |
-|---|---|
-| **Estação de ataque** | Kali Linux (notebook local) |
-| **Infraestrutura-alvo** | VPS própria hospedando alvos em Docker |
-| **Isolamento** | Redes Docker internas, acesso somente via SSH, firewall UFW |
-| **Alvos** | DVWA, OWASP Juice Shop, máquinas Linux de privesc, serviços corporativos simulados (FTP, SMB, DNS, API REST) |
+- Configs publicadas são **sanitizadas** (placeholders no lugar de credenciais).
 
----
+- Evidências com IPs/usuários sensíveis são anonimizadas quando necessário.
 
-## 🔄 Metodologia
+
+
+
+### Arquitetura : 1 host, 2 zonas separadas
 
 ```
-Reconhecimento → Enumeração → Exploração → Pós-Exploração → Relatório
+                             INTERNET
+                                │
+         ┌──────────────────────┴───────────────────────┐
+         │  ZONA EXPOSTA (liberada no firewall)         │
+         │   • Hardening do host  (SSH 2222)            │
+         │   • Honeypot Cowrie   (isca nas portas 22/23)│
+         │   • Site nginx + HTTPS (80/443)              │
+         │   • Scripts de auditoria (cron)              │
+         └──────────────────────┬───────────────────────┘
+                                │  (mesmo host — acesso só por túnel SSH)
+   ┌────────────────────────────┴──────────────────────── ──────┐
+   │ ZONA ISOLADA (somente 127.0.0.1 / redes internas Docker)   │
+   │  MONITORAÇÃO/SIEM                 ALVOS (treino)           │
+   │    • Wazuh (SIEM)                 • DVWA (web vulnerável)  │
+   │    • Zabbix (NOC)                 • AD Samba `corp.lab`    │
+   │    • Grafana (Dashboard)              + máquina atacante   │
+   └────────────────────────────────────────────────────────────┘
 ```
 
-1. **Reconhecimento** — coleta de informações passiva e ativa
-2. **Enumeração** — identificação de serviços e varredura de vulnerabilidades
-3. **Exploração** — ataques de prova de conceito controlados
-4. **Pós-Exploração** — escalação de privilégios e movimentação lateral
-5. **Relatório** — documentação com evidências, análise de impacto e remediação
 
----
+## Trilhas de estudo
 
-## 🧰 Stack de Ferramentas
+### Trilha NOC — "manter no ar e enxergar"
 
-| Categoria | Ferramentas |
-|-----------|-------------|
-| 🔍 Reconhecimento | Nmap · dig · whois · curl · Gobuster |
-| 🌐 Testes Web | Burp Suite · ffuf · Nikto · sqlmap |
-| 💥 Exploração | Metasploit · SearchSploit |
-| 🔑 Ataques a Credenciais | John the Ripper · Hashcat · Hydra |
-| ⬆️ Pós-Exploração | LinPEAS · enumeração manual |
-| 📊 Análise | Wireshark · tcpdump |
+1. **vps-hardening** — base de um servidor confiável.
 
----
+2. **nginx-site-tls** — publicar serviço com TLS e proteção básica.
 
-## 👤 Sobre
+3. **zabbix-noc** — monitorar disponibilidade/recursos e alertar quando algo cai.
 
-Estudante de segurança cibernética com foco em **Teste de Intrusão** e operações
-de **Red Team**, construindo experiência prática por meio de laboratórios
-hands-on e avaliações documentadas no formato de entregáveis reais.
+4. **security-scripts** — automação de verificações periódicas.
 
-<p align="center">
-  <a href="https://github.com/danielreis-offsec">
-    <img src="https://img.shields.io/badge/GitHub-danielreis--offsec-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-  </a>
-</p>
+*Habilidades:* Linux, redes/portas, TLS, monitoramento, SLAs/alertas, automação.
+
+### Trilha SOC — "detectar e responder"
+
+1. **cowrie-honeypot** — ver como atacantes reais agem.
+
+2. **wazuh-soc** — montar o SIEM e escrever regras.
+
+3. **attack-detection-web** — fechar o ciclo ataque↔detecção (web).
+
+4. **active-directory** — detecção de ataques de identidade (AD).
+
+*Habilidades:* análise de logs, SIEM, regras de correlação, MITRE ATT&CK, threat hunting, resposta automática.
+
+
+## Padrão de documentação de cada repositório
+
+Para manter tudo **padronizado**, cada pasta de laboratório segue este modelo:
+
+```
+<lab>/
+├── README.md          # objetivo, passo a passo, resultados, lições
+├── configs/           # arquivos de configuração SEM segredos
+├── evidence/          # prints de alertas, saídas de comando, logs anonimizados
+└── diagram.(md|png)   # diagrama do fluxo (opcional)
+```
+
+**Estrutura sugerida do `README.md` de cada lab:**
+
+1. **Objetivo** — o que o lab ensina (e qual skill NOC/SOC).
+
+2. **Ambiente** — onde roda, pré-requisitos.
+
+3. **Implementação** — passos e trechos de config.
+
+4. **Validação / Evidências** — como foi testado + prints.
+
+5. **Detecção / Monitoração** — o que o SIEM/NOC mostra.
+
+6. **Lições & MITRE** — o que foi aprendido, técnicas mapeadas.
+
+
+## ▶️ Acesso ao ambiente (referência)
+
+```
+ssh lab                                   # administração (porta 2222, por chave)
+ssh -L 8444:127.0.0.1:5601 lab            # Wazuh  → https://localhost:8444
+ssh -L 8081:127.0.0.1:8080 lab            # Zabbix → http://localhost:8081
+ssh -L 8091:127.0.0.1:8090 lab            # DVWA   → http://localhost:8091
+docker exec -it ad-attacker bash          # máquina de ataque do lab de AD
+```
+
+
+*Documento gerado como visão geral do laboratório. Cada laboratório possui (ou possuirá) seu próprio README detalhado na respectiva pasta.*
+

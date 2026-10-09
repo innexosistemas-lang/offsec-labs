@@ -1,0 +1,72 @@
+{
+  "uid": "lab-noc-zabbix",
+  "title": "NOC — Zabbix (Disponibilidade & Recursos)",
+  "tags": ["lab", "noc", "zabbix"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "HTTPS (443)",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "options": { "0": { "text": "FORA DO AR", "color": "red", "index": 0 } } },
+            { "type": "value", "options": { "1": { "text": "NO AR", "color": "green", "index": 1 } } }
+          ],
+          "color": { "mode": "thresholds" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 1 } ] }
+        },
+        "overrides": []
+      },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "background", "graphMode": "none", "textMode": "value" },
+      "targets": [
+        { "refId": "A", "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" }, "queryType": "0", "group": { "filter": "/.*/" }, "host": { "filter": "Zabbix server" }, "application": { "filter": "" }, "itemTag": { "filter": "" }, "item": { "filter": "HTTPS (443) disponível" }, "functions": [], "options": { "showDisabledItems": false } }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Memória disponível (%)",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 5 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" },
+      "fieldConfig": { "defaults": { "unit": "percent", "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "orange", "value": 15 }, { "color": "green", "value": 30 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "area", "textMode": "value" },
+      "targets": [
+        { "refId": "A", "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" }, "queryType": "0", "group": { "filter": "/.*/" }, "host": { "filter": "Zabbix server" }, "application": { "filter": "" }, "itemTag": { "filter": "" }, "item": { "filter": "Available memory in %" }, "functions": [], "options": { "showDisabledItems": false } }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "CPU utilization (%)",
+      "gridPos": { "h": 10, "w": 9, "x": 6, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" },
+      "fieldConfig": { "defaults": { "unit": "percent", "min": 0, "max": 100, "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2 }, "color": { "mode": "palette-classic" } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "targets": [
+        { "refId": "A", "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" }, "queryType": "0", "group": { "filter": "/.*/" }, "host": { "filter": "Zabbix server" }, "application": { "filter": "" }, "itemTag": { "filter": "" }, "item": { "filter": "CPU utilization" }, "functions": [], "options": { "showDisabledItems": false } }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Memory utilization (%)",
+      "gridPos": { "h": 10, "w": 9, "x": 15, "y": 0 },
+      "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" },
+      "fieldConfig": { "defaults": { "unit": "percent", "min": 0, "max": 100, "custom": { "drawStyle": "line", "fillOpacity": 20, "lineWidth": 2 }, "color": { "mode": "palette-classic" } }, "overrides": [] },
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" }, "tooltip": { "mode": "single" } },
+      "targets": [
+        { "refId": "A", "datasource": { "type": "alexanderzobnin-zabbix-datasource", "uid": "cg1435h0mal8gf" }, "queryType": "0", "group": { "filter": "/.*/" }, "host": { "filter": "Zabbix server" }, "application": { "filter": "" }, "itemTag": { "filter": "" }, "item": { "filter": "Memory utilization" }, "functions": [], "options": { "showDisabledItems": false } }
+      ]
+    }
+  ]
+}

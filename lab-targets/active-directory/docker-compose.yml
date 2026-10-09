@@ -1,0 +1,65 @@
+# Lab de identidade (Active Directory) — ISOLADO
+# Padrao do lab: portas publicadas SOMENTE em 127.0.0.1 (acesso via tunel SSH),
+# nunca no ufw, nunca em 0.0.0.0. Ataques rodam de dentro (container 'attacker').
+services:
+  dc01:
+    build: ./dc
+    image: lab-ad-dc:latest
+    container_name: ad-dc01
+    hostname: dc01
+    restart: unless-stopped
+    privileged: true           # Samba AD-DC precisa de caps amplas p/ provisionar/rodar
+    environment:
+      REALM: CORP.LAB
+      DOMAIN: CORP
+      DC_HOSTNAME: dc01
+      DC_IP: 172.30.0.10
+      DNS_FORWARDER: 1.1.1.1
+      DOMAIN_ADMIN_PASS: ${DOMAIN_ADMIN_PASS}
+    networks:
+      lab-ad:
+        ipv4_address: 172.30.0.10
+    volumes:
+      - ad_data:/var/lib/samba
+      - ad_conf:/etc/samba
+    # Exposto apenas em loopback do host (p/ tunel). Ataque interno usa a rede lab-ad.
+    ports:
+      - "127.0.0.1:53:53/tcp"
+      - "127.0.0.1:53:53/udp"
+      - "127.0.0.1:88:88/tcp"
+      - "127.0.0.1:88:88/udp"
+      - "127.0.0.1:389:389/tcp"
+      - "127.0.0.1:445:445/tcp"
+      - "127.0.0.1:464:464/tcp"
+      - "127.0.0.1:464:464/udp"
+      - "127.0.0.1:636:636/tcp"
+      - "127.0.0.1:3268:3268/tcp"
+      - "127.0.0.1:3269:3269/tcp"
+
+  attacker:
+    build: ./attacker
+    image: lab-ad-attacker:latest
+    container_name: ad-attacker
+    hostname: attacker
+    restart: unless-stopped
+    depends_on: [dc01]
+    dns:
+      - 172.30.0.10            # usa o DC como DNS (resolve corp.lab)
+    dns_search:
+      - corp.lab
+    networks:
+      lab-ad:
+        ipv4_address: 172.30.0.20
+    command: ["sleep", "infinity"]
+
+networks:
+  lab-ad:
+    name: lab-ad
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+volumes:
+  ad_data:
+  ad_conf:
