@@ -14,46 +14,6 @@ Este portfólio documenta um ambiente de estudo que cobre as duas pontas de um c
 
 Cada componente do laboratório é um exercício isolado, com o propósito de demonstrar hard skills, publicado aqui no GitHub.
 
-## Infraestrutura do Lab
-
-| Item | Detalhe |
-| - | - |
-| Host | VPS, Ubuntu 26.04 LTS, 4 vCPU / 16 GB RAM |
-| Acesso | SSH somente por chave, em porta não padrão (login de root desabilitado) |
-| Exposição | IP público 24/7 (ataques reais chegam de verdade) |
-| Contêineres | Docker (alvos vulneráveis isolados) |
-
-**Políticas**
-
-- Nada de senhas, chaves ou tokens no repositório (`.gitignore` cobre `*.key`, `*.pem`, `id_rsa*`, `.env`, `credentials.txt`).
-
-- Configs publicadas são **sanitizadas** (placeholders no lugar de credenciais).
-
-- Evidências com IPs/usuários sensíveis são anonimizadas quando necessário.
-
-- Portas de administração e de serviços internos não são publicadas.
-
-### Arquitetura: 1 host, 2 zonas separadas
-
-```
-                              INTERNET
-                                  │
-   ┌──────────────────────────────┴─────────────────────────────┐
-   │  ZONA EXPOSTA (liberada no firewall)                       │
-   │   • Hardening do host    (SSH em porta não padrão)         │
-   │   • Honeypot Cowrie      (isca nas portas 22/23)           │
-   │   • Site nginx + HTTPS   (80/443)                          │
-   │   • Scripts de auditoria (cron)                            │
-   └──────────────────────────────┬─────────────────────────────┘
-                                  │  (mesmo host — acesso só por túnel SSH)
-   ┌──────────────────────────────┴─────────────────────────────┐
-   │  ZONA ISOLADA (somente 127.0.0.1 / redes internas Docker)  │
-   │  MONITORAÇÃO/SIEM               ALVOS (treino)             │
-   │   • Wazuh (SIEM)                • DVWA (web vulnerável)    │
-   │   • Zabbix (NOC)                • AD Samba `corp.lab`      │
-   │   • Grafana (dashboards)                                   │
-   └────────────────────────────────────────────────────────────┘
-```
 
 ## Trilhas de estudo
 
@@ -81,15 +41,6 @@ Cada componente do laboratório é um exercício isolado, com o propósito de de
 
 *Habilidades:* análise de logs, SIEM, regras de correlação, MITRE ATT&CK, threat hunting, resposta automática.
 
-## Acesso ao ambiente (referência)
-
-Nenhum painel é exposto à internet: todos são acessados por túnel SSH a partir da máquina de administração.
-
-```
-ssh lab                                      # administração (somente por chave)
-ssh -L <porta-local>:127.0.0.1:<porta> lab   # túnel para Wazuh, Zabbix, Grafana ou DVWA
-docker exec -it ad-attacker bash             # máquina de ataque do lab de AD
-```
 
 ## Padrão de documentação de cada repositório
 
